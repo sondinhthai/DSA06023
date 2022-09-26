@@ -1,8 +1,10 @@
-import java.text.DecimalFormat;
+
+import java.text.*;
+import java.util.Date;
 import java.util.Scanner;
 
 public class J04007 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         Scanner scanner = new Scanner(System.in);
         String hoten = scanner.nextLine();
         String gioitinh = scanner.nextLine();
@@ -11,48 +13,9 @@ public class J04007 {
         String masothue = scanner.nextLine();
         String ngayKiHD = scanner.nextLine();
 
+        NhanVien nhanVien = new NhanVien("00001", hoten, gioitinh, ngaysinh, dichi, masothue, ngayKiHD);
 
-        String[] dateArr = ngaysinh.split("/");
-        String ngay = "", thang = "", nam = "";
-        ngay = dateArr[0];
-        thang = dateArr[1];
-        nam = dateArr[2];
-        if (Integer.parseInt(dateArr[0]) < 10) {
-            ngay = "0" + dateArr[0];
-        }
-
-        if (Integer.parseInt(dateArr[1]) < 10) {
-            thang = "0" + dateArr[1];
-        }
-
-        String date = ngay + "/" + thang + "/" + nam;
-
-
-
-        String[] dateArr1 = ngayKiHD.split("/");
-        String ngay1 = "", thang1 = "", nam1 = "";
-        ngay1 = dateArr1[0];
-        thang1 = dateArr1[1];
-        nam1 = dateArr1[2];
-        if (Integer.parseInt(dateArr1[0]) < 10) {
-            ngay1 = "0" + dateArr1[0];
-        }
-
-        if (Integer.parseInt(dateArr1[1]) < 10) {
-            thang1 = "0" + dateArr1[1];
-        }
-
-        String date1 = ngay1 + "/" + thang1 + "/" + nam1;
-
-        NhanVien nhanVien = new NhanVien("00001", hoten, gioitinh, date, dichi, masothue, date1);
-
-        System.out.println(nhanVien.getMaNV() + " "
-                            + nhanVien.getHoTen() + " "
-                            + nhanVien.getGioiTinh() + " "
-                            + nhanVien.getNgaySinh() + " "
-                            + nhanVien.getDiaChi() + " "
-                            + nhanVien.getMaSoThue() + " "
-                            + nhanVien.getNgayKyHD() + " ");
+        System.out.println(nhanVien);
     }
 }
 
@@ -60,74 +23,24 @@ class NhanVien {
     private String maNV;
     private String hoTen;
     private String gioiTinh;
-    private String ngaySinh;
+    private Date ngaySinh;
     private String diaChi;
     private String maSoThue;
-    private String ngayKyHD;
+    private Date ngayKyHD;
 
-    public NhanVien(String maNV, String hoTen, String gioiTinh, String ngaySinh, String diaChi, String maSoThue, String ngayKyHD) {
+    public NhanVien(String maNV, String hoTen, String gioiTinh, String ngaySinh, String diaChi, String maSoThue, String ngayKyHD) throws ParseException {
         this.maNV = maNV;
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
-        this.ngaySinh = ngaySinh;
+        this.ngaySinh = new SimpleDateFormat("dd/MM/yyyy").parse(ngaySinh);
         this.diaChi = diaChi;
         this.maSoThue = maSoThue;
-        this.ngayKyHD = ngayKyHD;
+        this.ngayKyHD = new SimpleDateFormat("dd/MM/yyyy").parse(ngayKyHD);
+    }
+    @Override
+    public String toString() {
+        return maNV + " " + hoTen + " " + gioiTinh + " " + new SimpleDateFormat("dd/MM/yyyy").format(ngaySinh) +
+                " " + diaChi + " " + maSoThue + " " + new SimpleDateFormat("dd/MM/yyyy").format(ngayKyHD);
     }
 
-    public String getMaNV() {
-        return maNV;
-    }
-
-    public void setMaNV(String maNV) {
-        this.maNV = maNV;
-    }
-
-    public String getHoTen() {
-        return hoTen;
-    }
-
-    public void setHoTen(String hoTen) {
-        this.hoTen = hoTen;
-    }
-
-    public String getGioiTinh() {
-        return gioiTinh;
-    }
-
-    public void setGioiTinh(String gioiTinh) {
-        this.gioiTinh = gioiTinh;
-    }
-
-    public String getNgaySinh() {
-        return ngaySinh;
-    }
-
-    public void setNgaySinh(String ngaySinh) {
-        this.ngaySinh = ngaySinh;
-    }
-
-    public String getDiaChi() {
-        return diaChi;
-    }
-
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
-    }
-
-    public String getMaSoThue() {
-        return maSoThue;
-    }
-
-    public void setMaSoThue(String maSoThue) {
-        this.maSoThue = maSoThue;
-    }
-
-    public String getNgayKyHD() {
-        return ngayKyHD;
-    }
-
-    public void setNgayKyHD(String ngayKyHD) {
-        this.ngayKyHD = ngayKyHD;
-    }
 }
