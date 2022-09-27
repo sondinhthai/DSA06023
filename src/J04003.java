@@ -1,54 +1,33 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class J04003 {
+    private long Tu,Mau;
+
+    public J04003(long Tu, long Mau) {
+        this.Tu = Tu;
+        this.Mau = Mau;
+    }
+    public J04003 toiGian(){
+        long g= gcd(this.Tu,this.Mau);
+        return new J04003(Tu/g, Mau/g);
+    }
+    @Override
+    public String toString() {
+        return Tu + "/" + Mau;
+    }
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        long a = scanner.nextInt();
-        long b = scanner.nextInt();
+        Scanner sc = new Scanner(System.in);
 
-        PhanSo phanSo = new PhanSo(a, b);
+        System.out.println(new J04003(sc.nextLong(),sc.nextLong()).toiGian());
 
-        phanSo.toiGianPhanSo();
-        long tuSo = phanSo.getTuSo();
-        long mauSo = phanSo.getMauSo();
-
-        System.out.println(tuSo + "/" + mauSo);
     }
-}
-
-class PhanSo {
-    private long tuSo, mauSo;
-
-    public PhanSo(long tuSo, long mauSo) {
-        this.tuSo = tuSo;
-        this.mauSo = mauSo;
-    }
-
-    public long getTuSo() {
-        return tuSo;
-    }
-
-    public void setTuSo(long tuSo) {
-        this.tuSo = tuSo;
-    }
-
-    public long getMauSo() {
-        return mauSo;
-    }
-
-    public void setMauSo(long mauSo) {
-        this.mauSo = mauSo;
-    }
-
-    public long timUSCLN(long a, long b) {
-        if (a == 0) return b;
-
-        return timUSCLN(b % a, a);
-    }
-
-    public void toiGianPhanSo() {
-        long i = timUSCLN(this.getTuSo(), this.getMauSo());
-        tuSo = this.getTuSo() / i;
-        mauSo = this.getMauSo() / i;
+    public static long gcd(long a,long b){
+        while(b!=0){
+            long t =b;
+            b = a%b;
+            a=t;
+        }
+        return a;
     }
 }
