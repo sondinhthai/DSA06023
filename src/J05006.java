@@ -1,25 +1,31 @@
-
-import java.text.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public class J04007 {
+public class J05006 {
     public static void main(String[] args) throws ParseException {
         Scanner scanner = new Scanner(System.in);
-        String hoten = scanner.nextLine();
-        String gioitinh = scanner.nextLine();
-        String ngaysinh = scanner.nextLine();
-        String dichi = scanner.nextLine();
-        String masothue = scanner.nextLine();
-        String ngayKiHD = scanner.nextLine();
+        int n = Integer.parseInt(scanner.nextLine());
 
-        NhanVienJ04007 nhanVien = new NhanVienJ04007("00001", hoten, gioitinh, ngaysinh, dichi, masothue, ngayKiHD);
+        for (int i=1;i<=n;i++){
+            String hoten = scanner.nextLine();
+            String gioitinh = scanner.nextLine();
+            String ngaysinh = scanner.nextLine();
+            String dichi = scanner.nextLine();
+            String masothue = scanner.nextLine();
+            String ngayKiHD = scanner.nextLine();
 
-        System.out.println(nhanVien);
+            NhanVienJ05006 nhanVien = new NhanVienJ05006(String.format("%05d", i), hoten, gioitinh, ngaysinh, dichi, masothue, ngayKiHD);
+
+            System.out.println(nhanVien);
+        }
+
+
     }
 }
 
-class NhanVienJ04007 {
+class NhanVienJ05006 {
     private String maNV;
     private String hoTen;
     private String gioiTinh;
@@ -28,7 +34,7 @@ class NhanVienJ04007 {
     private String maSoThue;
     private Date ngayKyHD;
 
-    public NhanVienJ04007(String maNV, String hoTen, String gioiTinh, String ngaySinh, String diaChi, String maSoThue, String ngayKyHD) throws ParseException {
+    public NhanVienJ05006(String maNV, String hoTen, String gioiTinh, String ngaySinh, String diaChi, String maSoThue, String ngayKyHD) throws ParseException {
         this.maNV = maNV;
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
