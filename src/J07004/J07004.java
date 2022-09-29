@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-public class J07004 {
+public class  J07004 {
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(new File("C:\\Users\\Admin\\IdeaProjects\\DSA06023\\src\\J07004\\DATA.in"));
         Map<Integer,Integer> m = new TreeMap<>();

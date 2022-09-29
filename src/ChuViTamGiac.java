@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class ChuViTamGiac {
-    public static double tinhTamGiac(Point p1, Point p2, Point p3){
+    public static double tinhTamGiac(PointTamGiac p1, PointTamGiac p2, PointTamGiac p3){
         double d1 = Math.sqrt((p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y));
         double d2 = Math.sqrt((p2.x-p3.x)*(p2.x-p3.x) + (p2.y-p3.y)*(p2.y-p3.y));
         double d3 = Math.sqrt((p1.x-p3.x)*(p1.x-p3.x) + (p1.y-p3.y)*(p1.y-p3.y));
@@ -23,9 +23,9 @@ public class ChuViTamGiac {
             double x3 = scanner.nextDouble();
             double y3 = scanner.nextDouble();
 
-            Point p1 = new Point(x1, y1);
-            Point p2 = new Point(x2, y2);
-            Point p3 = new Point(x3, y3);
+            PointTamGiac p1 = new PointTamGiac(x1, y1);
+            PointTamGiac p2 = new PointTamGiac(x2, y2);
+            PointTamGiac p3 = new PointTamGiac(x3, y3);
 
             if (tinhTamGiac(p1, p2, p3) == 0){
                 System.out.println("INVALID");
