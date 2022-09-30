@@ -6,7 +6,7 @@ public class J07002 {
     public static void main(String args[]) throws FileNotFoundException {
 
         long total = 0;
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("VANBAN.in"))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Admin\\IdeaProjects\\DSA06023\\src\\J07002\\DATA.in"))) {
             String line = bufferedReader.readLine();
             while (line != null) {
                 line = line.replaceAll("[^0-9,-\\.]", ",");

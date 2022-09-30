@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class J07015 {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        ObjectInputStream sc=new ObjectInputStream(new FileInputStream("SONGUYEN.in"));
+        ObjectInputStream sc=new ObjectInputStream(new FileInputStream("C:\\Users\\Admin\\IdeaProjects\\DSA06023\\src\\J07015\\SONGUYEN.in"));
         ArrayList<Integer> ds = (ArrayList<Integer>) sc.readObject();
         int a[]=new int[100000];
         for(Integer i:ds){
