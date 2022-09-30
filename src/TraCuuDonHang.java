@@ -35,10 +35,10 @@ class MatHang{
     }
 
     public void check(){
-        soThuTuDonHang = String.valueOf(maHang.charAt(1) + maHang.charAt(2) + maHang.charAt(3));
+        soThuTuDonHang = String.valueOf(maHang.charAt(1)) + String.valueOf(maHang.charAt(2)) + String.valueOf(maHang.charAt(3));
         loai = String.valueOf(maHang.charAt(4));
 
-        if (loai.equals("1")){
+        if (loai.equals("2")){
             giamGia = (int) (0.3*donGia*soLuong);
         } else {
             giamGia = (int) (0.5*donGia*soLuong);
