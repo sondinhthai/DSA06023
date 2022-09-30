@@ -26,21 +26,20 @@ public class J05024 {
             String querry = scanner.nextLine();
             System.out.println("DANH SACH SINH VIEN NGANH " + querry.toUpperCase() + ":");
             for (SinhVien sinhVien : list){
-                String maNganh = String.valueOf(sinhVien.getMaSV().charAt(5)) + String.valueOf(sinhVien.getMaSV().charAt(6));
-//                if (maNganh.equals("DCKT")){
-//                    nganh = "Ke toan";
-//                } else if (maNganh.equals("DCCN") && !String.valueOf(sinhVien.getLop().charAt(0)).equals("E")) {
-//                    nganh = "Cong nghe thong tin";
-//                } else if (maNganh.equals("DCAT") && !String.valueOf(sinhVien.getLop().charAt(0)).equals("E")) {
-//                    nganh = "An toan thong tin";
-//                } else if (maNganh.equals("DCDT")) {
-//                    nganh = "Dien tu";
-//                } else if (maNganh.equals("DCVT")) {
-//                    nganh = "Vien thong";
-//                }
-                String[] item = querry.split(" ");
-                String res = String.valueOf(item[0].charAt(0)) + String.valueOf(item[1].charAt(0));
-                if (res.equalsIgnoreCase(maNganh) && !String.valueOf(sinhVien.getLop().charAt(0)).equals("E")){
+                String maNganh = String.valueOf(sinhVien.getMaSV().charAt(3)) + String.valueOf(sinhVien.getMaSV().charAt(4)) + String.valueOf(sinhVien.getMaSV().charAt(5)) + String.valueOf(sinhVien.getMaSV().charAt(6));
+                if (maNganh.equals("DCKT")){
+                    nganh = "Ke toan";
+                } else if (maNganh.equals("DCCN") && !String.valueOf(sinhVien.getLop().charAt(0)).equals("E")) {
+                    nganh = "Cong nghe thong tin";
+                } else if (maNganh.equals("DCAT") && !String.valueOf(sinhVien.getLop().charAt(0)).equals("E")) {
+                    nganh = "An toan thong tin";
+                } else if (maNganh.equals("DCDT")) {
+                    nganh = "Dien tu";
+                } else if (maNganh.equals("DCVT")) {
+                    nganh = "Vien thong";
+                }
+
+                if (nganh.equalsIgnoreCase(querry)){
                     System.out.println(sinhVien);
                 }
             }
