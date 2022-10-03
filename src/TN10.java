@@ -1,6 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
-
+//asdasd
 public class TN10 {
     static String str;
     static int n;
