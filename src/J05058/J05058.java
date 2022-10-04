@@ -1,96 +1,54 @@
 package J05058;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.text.DecimalFormat;
+import java.util.*;
 
 public class J05058 {
-    public static class ThiSinh {
-
-        private String ma, hoTen, trangThai;
-        private double diemUT, tongDiem, diem1, diem2, diem3;
-
-        public ThiSinh(String ma, String hoTen, double diem1, double diem2, double diem3) {
-            this.ma = ma;
-            this.hoTen = hoTen;
-            this.diem1 = diem1;
-            this.diem2 = diem2;
-            this.diem3 = diem3;
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int t=Integer.parseInt(sc.nextLine());
+        List<ThiSinh> list=new ArrayList<>();
+        for(int i=0;i<t;i++){
+            list.add(new ThiSinh(sc.nextLine(), sc.nextLine(), Double.parseDouble(sc.nextLine())*2.0
+                    ,Double.parseDouble(sc.nextLine()),Double.parseDouble(sc.nextLine())));
         }
+        Collections.sort(list);
+        for(ThiSinh thiSinh:list)
+            System.out.println(thiSinh);
+    }
+}
+class ThiSinh implements Comparable<ThiSinh>{
+    private String ma,ten,trangThai,khuVuc;
+    private double toan,ly,hoa,cong,tongDiem;
+    private DecimalFormat decimalFormat=new DecimalFormat("#.#");
 
-        public void timDiemUT() {
-            String s = "";
-            for (int i = 0; i <= 2; i++) {
-                s += this.ma.charAt(i);
-            }
-            if (s.equals("KV1")) {
-                this.diemUT = 0.5;
-            } else if (s.equals("KV2")) {
-                this.diemUT = 1;
-            } else {
-                this.diemUT = 2.5;
-            }
+    public ThiSinh(String ma, String ten, double toan, double ly, double hoa) {
+        this.ma = ma;
+        this.ten = ten;
+        this.toan = toan;
+        this.ly = ly;
+        this.hoa = hoa;
+        khuVuc=ma.substring(0,3);
+        switch (khuVuc){
+            case "KV1": cong=0.5;break;
+            case "KV2": cong=1.0;break;
+            default: cong=2.5;break;
         }
-
-        public void timTongDiem() {
-            double diem = diem1 + diem1 + diem2 + diem3;
-            this.tongDiem = diem;
-        }
-
-        public void timTrangThai() {
-            if (tongDiem + diemUT < 24) {
-                this.trangThai = "TRUOT";
-            } else {
-                this.trangThai = "TRUNG TUYEN";
-            }
-        }
-
-        @Override
-        public String toString() {
-            int intDiemUT = (int) diemUT;
-            int intTongDiem = (int) tongDiem;
-            if (intDiemUT == diemUT) {
-                if (intTongDiem == tongDiem) {
-                    return ma + " " + hoTen + " " + intDiemUT + " " + (intTongDiem + intDiemUT) + " " + trangThai;
-                } else {
-                    return ma + " " + hoTen + " " + intDiemUT + " " + (tongDiem + intDiemUT) + " " + trangThai;
-                }
-            } else {
-                if (intTongDiem == tongDiem) {
-                    return ma + " " + hoTen + " " + diemUT + " " + (intTongDiem + diemUT) + " " + trangThai;
-                } else {
-                    return ma + " " + hoTen + " " + diemUT + " " + (tongDiem + diemUT) + " " + trangThai;
-                }
-            }
-
-        }
-
+        tongDiem=Math.round((toan+ly+hoa+cong)*10.0)/10.0;
+        if(tongDiem>=24.0) trangThai="TRUNG TUYEN";
+        else trangThai="TRUOT";
     }
 
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int t = Integer.parseInt(in.nextLine());
-        ArrayList<ThiSinh> listNV = new ArrayList<ThiSinh>();
-        for (int i = 1; i <= t; i++) {
-            ThiSinh a = new ThiSinh(in.nextLine(), in.nextLine(), Double.parseDouble(in.nextLine()), Double.parseDouble(in.nextLine()), Double.parseDouble(in.nextLine()));
-            a.timDiemUT();
-            a.timTongDiem();
-            a.timTrangThai();
-            listNV.add(a);
+    @Override
+    public String toString() {
+        return String.format("%s %s %s %s %s",ma,ten,decimalFormat.format(cong),decimalFormat.format(tongDiem),trangThai);
+    }
+
+    @Override
+    public int compareTo(ThiSinh o) {
+        if(tongDiem==o.tongDiem){
+            return ma.compareTo(o.ma);
         }
-        listNV.sort(new Comparator<ThiSinh>() {
-            @Override
-            public int compare(ThiSinh o1, ThiSinh o2) {
-                if (o1.tongDiem + o1.diemUT < o2.tongDiem + o2.diemUT) {
-                    return 1;
-                } else if (o1.tongDiem + o1.diemUT == o2.tongDiem + o2.diemUT && o1.ma.compareTo(o2.ma) < 0) {
-                    return 1;
-                }
-                return -1;
-            }
-        });
-        for (ThiSinh thiSinh : listNV) {
-            System.out.println(thiSinh);
-        }
+        return tongDiem>o.tongDiem?-1:1;
     }
 }
