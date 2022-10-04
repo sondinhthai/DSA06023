@@ -6,41 +6,43 @@ import java.util.Scanner;
 
 public class J05024 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int t = Integer.parseInt(scanner.nextLine());
-        List<SinhVien> list = new ArrayList<>();
-
-        while (t-->0){
-            String maSV = scanner.nextLine();
-            String hoTen = scanner.nextLine();
-            String lop = scanner.nextLine();
-            String email = scanner.nextLine();
-
-            SinhVien sinhVien = new SinhVien(maSV, hoTen, lop, email);
-            list.add(sinhVien);
+        Scanner sc = new Scanner(System.in);
+        int t = Integer.parseInt(sc.nextLine());
+        ArrayList<SinhVien> listSV = new ArrayList<>();
+        ArrayList<String> listLop = new ArrayList<>();
+        while (t-- > 0) {
+            String maSV = sc.nextLine();
+            String hoTen = sc.nextLine();
+            String maLop = sc.nextLine();
+            String email = sc.nextLine();
+            SinhVien a = new SinhVien(maSV, hoTen, maLop, email);
+            listSV.add(a);
         }
 
-        int q = Integer.parseInt(scanner.nextLine());
-        while (q-->0){
-            String nganh = "";
-            String querry = scanner.nextLine();
-            System.out.println("DANH SACH SINH VIEN NGANH " + querry.toUpperCase() + ":");
-            for (SinhVien sinhVien : list){
-                String maNganh = String.valueOf(sinhVien.getMaSV().charAt(3)) + String.valueOf(sinhVien.getMaSV().charAt(4)) + String.valueOf(sinhVien.getMaSV().charAt(5)) + String.valueOf(sinhVien.getMaSV().charAt(6));
-                if (maNganh.equals("DCKT")){
-                    nganh = "Ke toan";
-                } else if (maNganh.equals("DCCN") && !String.valueOf(sinhVien.getLop().charAt(0)).equals("E")) {
-                    nganh = "Cong nghe thong tin";
-                } else if (maNganh.equals("DCAT") && !String.valueOf(sinhVien.getLop().charAt(0)).equals("E")) {
-                    nganh = "An toan thong tin";
-                } else if (maNganh.equals("DCDT")) {
-                    nganh = "Dien tu";
-                } else if (maNganh.equals("DCVT")) {
-                    nganh = "Vien thong";
-                }
+        int n = Integer.parseInt(sc.nextLine());
+        while (n-- > 0) {
+            String s = sc.nextLine();
+            s = s.toUpperCase();
+            listLop.add(s);
+        }
+        for (String string : listLop) {
+            System.out.println("DANH SACH SINH VIEN NGANH " + string + ":");
 
-                if (nganh.equalsIgnoreCase(querry)){
-                    System.out.println(sinhVien);
+            for (SinhVien sinh : listSV) {
+                if(string.equalsIgnoreCase("KE TOAN") && sinh.getMaSV().indexOf("DCKT") != -1){
+                    sinh.in();
+                }
+                else if(string.equalsIgnoreCase("CONG NGHE THONG TIN") && sinh.getMaSV().indexOf("DCCN") != -1 && sinh.getMaLop().charAt(0) != 'E'){
+                    sinh.in();
+                }
+                else if(string.equalsIgnoreCase("AN TOAN THONG TIN") && sinh.getMaSV().indexOf("DCAT") != -1 && sinh.getMaLop().charAt(0) != 'E'){
+                    sinh.in();
+                }
+                else if(string.equalsIgnoreCase("VIEN THONG") && sinh.getMaSV().indexOf("DCVT") != -1){
+                    sinh.in();
+                }
+                else if(string.equalsIgnoreCase("DIEN TU") && sinh.getMaSV().indexOf("DCDT") != -1){
+                    sinh.in();
                 }
             }
         }
@@ -49,13 +51,13 @@ public class J05024 {
 class SinhVien{
     private String maSV;
     private String hoTen;
-    private String lop;
+    private String maLop;
     private String email;
 
-    public SinhVien(String maSV, String hoTen, String lop, String email) {
+    public SinhVien(String maSV, String hoTen, String maLop, String email) {
         this.maSV = maSV;
         this.hoTen = hoTen;
-        this.lop = lop;
+        this.maLop = maLop;
         this.email = email;
     }
 
@@ -75,12 +77,12 @@ class SinhVien{
         this.hoTen = hoTen;
     }
 
-    public String getLop() {
-        return lop;
+    public String getMaLop() {
+        return maLop;
     }
 
-    public void setLop(String lop) {
-        this.lop = lop;
+    public void setMaLop(String maLop) {
+        this.maLop = maLop;
     }
 
     public String getEmail() {
@@ -91,8 +93,7 @@ class SinhVien{
         this.email = email;
     }
 
-    @Override
-    public String toString(){
-        return maSV + " " + hoTen + " " + lop + " " + email;
+    public void in() {
+        System.out.println(maSV + " " + hoTen + " " + maLop + " " + email + " ");
     }
 }
