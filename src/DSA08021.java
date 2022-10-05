@@ -1,65 +1,62 @@
 import java.util.Scanner;
 
 public class DSA08021 {
-    static boolean[] isPrime = new boolean[10000];
-    static int S, T;
-    static String[] queue = new String[10000];
+    static int n, m;
+    static int[][] matrix;
+    static int[][] matrix2;
+    static int[] er = new int[1000000];
+    static int[] ec = new int[1000000];
     static int head, tail;
-    static int[] step = new int[10000];
-    static boolean[] mark;
 
-    static void init() {
-        for (int i = 0; i < 10000; i++) isPrime[i] = true;
-        for (int i = 2; i < 10000; i++) {
-            if (isPrime[i]) {
-                for (int j = i * i; j < 10000; j = j + i) {
-                    isPrime[j] = false;
-                }
-            }
-        }
-    }
-
-    static int solution(String S, int T) {
-        mark = new boolean[10000];
+    static int solve() {
         head = 0;
         tail = 0;
-        queue[0] = S;
-        mark[Integer.parseInt(S)] = true;
-        step[0] = 0;
+        er[0] = 1;
+        ec[0] = 1;
+        matrix2[1][1] = 1;
         while (head <= tail) {
-            String top = queue[head];
-            int tops = step[head];
+            int topr = er[head];
+            int topc = ec[head];
+            int topm = matrix2[topr][topc];
+            int step = matrix[topr][topc];
             head++;
-            StringBuilder temp;
-            for (int digit = 0; digit < 4; digit++) {
-                for (int i = 0; i <= 9; i++) {
-                    if (digit == 0 && i == 0) continue;
-                    char c = (char) (i + 48);
-                    temp = new StringBuilder(top);
-                    temp.setCharAt(digit, c);
-                    int number = Integer.parseInt(temp.toString());
-                    if (!mark[number] && isPrime[number]) {
-                        if (number == T) return tops + 1;
-                        tail++;
-                        queue[tail] = temp.toString();
-                        step[tail] = tops + 1;
-                        mark[number] = true;
-                    }
-                }
+            if (topr == n && topc == m) return topm - 1;
+
+            int tempr = topr;
+            int tempc = topc + step;
+            if (tempr >= 1 && tempr <= n && tempc >= 1 && tempc <= m && matrix2[tempr][tempc] == 0) {
+                tail++;
+                er[tail] = tempr;
+                ec[tail] = tempc;
+                matrix2[tempr][tempc] = topm + 1;
+            }
+
+            tempr = topr + step;
+            tempc = topc;
+            if (tempr >= 1 && tempr <= n && tempc >= 1 && tempc <= m && matrix2[tempr][tempc] == 0) {
+                tail++;
+                er[tail] = tempr;
+                ec[tail] = tempc;
+                matrix2[tempr][tempc] = topm + 1;
             }
         }
-        return 0;
+        return -1;
     }
 
     public static void main(String[] args) {
-        init();
         Scanner in = new Scanner(System.in);
         int t = in.nextInt();
         while (t-- > 0) {
-            S = in.nextInt();
-            T = in.nextInt();
-            System.out.println(solution(Integer.toString(S), T));
-
+            n = in.nextInt();
+            m = in.nextInt();
+            matrix = new int[n + 1][m + 1];
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= m; j++) {
+                    matrix[i][j] = in.nextInt();
+                }
+            }
+            matrix2 = new int[n + 1][m + 1];
+            System.out.println(solve());
         }
     }
 }
