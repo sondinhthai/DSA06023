@@ -5,7 +5,7 @@ public class BienDoiSoTuNhien {
         Scanner scanner = new Scanner(System.in);
         int t = scanner.nextInt();
         while (t-->0){
-            long n = scanner.nextLong();
+            Long n = scanner.nextLong();
             Queue<Long> queue = new LinkedList<>();
             queue.add(n);
             Map<Long, Integer> map = new HashMap<>();

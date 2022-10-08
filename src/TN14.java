@@ -1,29 +1,25 @@
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class TN14 {
-    static long mod = 1000000007;
+    static int m = 1000000007;
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-        while(t-- > 0){
-            int n = sc.nextInt();
-            PriorityQueue<Long> a = new PriorityQueue<>();
-            long val;
-            for (int i = 0; i < n; i++) {
-                val = sc.nextLong();
-                a.add(val);
+
+        Scanner in = new Scanner(System.in);
+        int test = in.nextInt();
+        while (test-- > 0) {
+            int n = in.nextInt();
+            Queue<Long> value = new PriorityQueue<>();
+            for (int i = 0; i < n; i++) value.offer(in.nextLong());
+            long minTime = 0;
+            for (int i = 0; i < n-1; i++) {
+                long day1 = value.poll();
+                long day2 = value.poll();
+                value.offer((day1+day2)%m);
+                minTime = (minTime + day1 + day2)%m;
             }
-            long res = 0;
-            while(a.size() > 1){
-                long x = a.poll();
-                long y = a.poll();
-                long temp = (x + y) % mod;
-                a.add(temp);;
-                res += temp;
-                res %= mod;
-            }
-            System.out.println(res);
+            System.out.println(minTime);
         }
     }
 }
