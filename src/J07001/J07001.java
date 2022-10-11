@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class J07001 {
     public static void main(String args[]) throws FileNotFoundException {
 
-        String url = "C:\\Users\\Admin\\IdeaProjects\\DSA06023\\src\\J07001\\VANBAN.in";
+        String url = "DATA.in";
 
         FileInputStream fileInputStream = new FileInputStream(url);
         Scanner scanner = new Scanner(fileInputStream);
