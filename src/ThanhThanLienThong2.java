@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class ThanhThanLienThong2 {
     static List<Integer>[] list = (List<Integer>[]) new List[500000];
     static long[] check = new long[500000];
-
+    //abcdef
     static void DFS(int u) {
         check[u] = 1;
         for (int i = 0; i < list[u].size(); i++) {
