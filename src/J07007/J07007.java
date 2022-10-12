@@ -10,7 +10,7 @@ import java.util.TreeSet;
 public class J07007 {
     public static void main(String args[]) throws FileNotFoundException {
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Admin\\IdeaProjects\\DSA06023\\src\\J07007\\VANBAN.in"))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("VANBAN.in"))) {
             String line = bufferedReader.readLine();
             TreeSet<String> treeSet = new TreeSet<>();
             while (line != null) {
