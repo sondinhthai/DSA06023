@@ -7,7 +7,7 @@ import java.util.*;
 
 public class J07010 {
     public static void main(String[] args) throws ParseException, FileNotFoundException {
-        Scanner sc = new Scanner(new File("C:\\Users\\Admin\\IdeaProjects\\DSA06023\\src\\J07010\\SV.in"));
+        Scanner sc = new Scanner(new File("SV.in"));
         int t = sc.nextInt();
         sc.nextLine();
 
