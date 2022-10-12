@@ -6,7 +6,7 @@ public class DuongDiTheoBFSvoiDoThiVoHuong {
     static int[] before = new int[1005];
     static int start, end;
 
-    static int[] traceBFS(int start, int end) {
+    static int[] traceBFS(int start) {
         Queue<Integer> queue = new LinkedList<>();
         queue.add(start);
         check[start] = 0;
@@ -18,7 +18,6 @@ public class DuongDiTheoBFSvoiDoThiVoHuong {
                     check[v] = 0;
                     queue.add(v);
                     before[v] = u;
-
                 }
             }
         }
@@ -26,7 +25,7 @@ public class DuongDiTheoBFSvoiDoThiVoHuong {
     }
 
     static void solve(int start, int end) {
-        traceBFS(start, end);
+        traceBFS(start);
         if (before[end] == 0) System.out.println("-1");
         else {
             Stack<Integer> stack = new Stack<>();
