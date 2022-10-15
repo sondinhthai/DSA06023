@@ -1,67 +1,46 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class KiemTraChuTrinh {
-    static class Graph {
-        int vertices;
-        List<Integer>[] adjList;
-
-        public Graph(int vertices) {
-            this.vertices = vertices;
-            adjList = new List[1005];
-            for (int i = 0; i < vertices; i++) {
-                adjList[i] = new ArrayList<>();
-            }
-        }
-
-        public void addEdge(int source, int destination) {
-            adjList[source].add(destination);
-        }
-
-        public boolean isCycle() {
-            boolean visited[] = new boolean[1005];
-            boolean recursiveArr[] = new boolean[1005];
-
-            for (int i = 0; i < vertices; i++) {
-                if (isCycleUtil(i, visited, recursiveArr))
-                    return true;
-            }
-            return false;
-        }
-
-        public boolean isCycleUtil(int vertex, boolean[] visited, boolean[] recursiveArr) {
-            visited[vertex] = true;
-            recursiveArr[vertex] = true;
-
-            for (int i = 0; i < adjList[vertex].size(); i++) {
-
-                int adjVertex = adjList[vertex].get(i);
-                if (!visited[adjVertex] && isCycleUtil(adjVertex, visited, recursiveArr)) {
-                    return true;
-                } else if (recursiveArr[adjVertex])
-                    return true;
-            }
-            recursiveArr[vertex] = false;
-            return false;
-        }
-    }
+    static boolean[] visit = new boolean[1005];
+    static boolean kt = false;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
+        int t = Integer.parseInt(sc.nextLine());
         while (t-- > 0) {
+            Arrays.fill(visit, false);
+            kt = false;
             int v = sc.nextInt();
             int e = sc.nextInt();
-            Graph graph = new Graph(v);
-            for (int i = 0; i < e; i++) {
-                int a = sc.nextInt();
-                int b = sc.nextInt();
-                graph.addEdge(a, b);
+            Vector<Integer>[] graph = new Vector[v + 5];
+            for (int i = 0; i < v + 5; i++) {
+                graph[i] = new Vector<Integer>();
             }
-            boolean result = graph.isCycle();
-            if (result) System.out.println("YES");
+            for (int i = 0; i < e; i++) {
+                int x = sc.nextInt();
+                int y = sc.nextInt();
+                graph[x].add(y);
+                graph[y].add(x);
+            }
+            for (int i = 1; i <= v; i++) {
+                dfs(i, graph, 0);
+                Arrays.fill(visit, false);
+                if (kt) break;
+            }
+            if (kt) System.out.println("YES");
             else System.out.println("NO");
+        }
+    }
+
+    public static void dfs(int u, Vector<Integer>[] vect, int t) {
+        visit[u] = true;
+        for (int i = 0; i < vect[u].size(); i++) {
+            if (!visit[vect[u].get(i)]) {
+                dfs(vect[u].get(i), vect, u);
+            }
+            else if (t != vect[u].get(i)) {
+                kt = true;
+            }
         }
     }
 }
